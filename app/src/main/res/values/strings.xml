@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PlanningPoker</string>
+    <string name="next_topic">Next topic</string>
+    <string name="you_are_in_fragmentb">You are in fragmentB!</string>
+    <string name="submit">Submit</string>
+    <string name="you_are_in_fragment_grid">You are in fragment grid!</string>
+    <string name="login">Login</string>
+    <string name="enter_name">Enter Name</string>
+
+</resources>
