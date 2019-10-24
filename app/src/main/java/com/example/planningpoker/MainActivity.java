@@ -8,17 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-
+    DbHelper mydb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
+        mydb = new DbHelper(this);
+        mydb.InsertData_User("Joska");
+        mydb.InsertData_TASK("Jo kerdes");
     }
 
     public void login_check(View view) {
-
-
-
 
 
         //ellenorzes
