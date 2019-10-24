@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
     public void login_check(View view) {
 
 
+
+
+
         //ellenorzes
         Intent intent = new Intent(this, VoteActivity.class);
         //EditText editText = (EditText) findViewById(R.id.editText);
