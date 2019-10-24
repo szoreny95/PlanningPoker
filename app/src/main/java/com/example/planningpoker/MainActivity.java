@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login_check(View view) {
-        //
+        //ellenorzes
 
         FragmentTransaction frag_trans = getSupportFragmentManager().beginTransaction();
         frag_trans.add(R.id.fragment_container,new FragmentGrid());
