@@ -2,6 +2,7 @@ package com.example.planningpoker;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
@@ -74,4 +75,39 @@ public class DbHelper extends SQLiteOpenHelper {
         else
             return true;
     }
+    public Cursor GetAllData_User (){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select *from "+ TABLE_USER,null);
+        return res;
+    }
+    public Cursor GetAllData_Task (){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select *from "+ TABLE_TASK,null);
+        return res;
+    }
+    public Cursor GetAllData_Voting (){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select *from "+ TABLE_VOTING,null);
+        return res;
+    }
+    public boolean is_exist_user(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select *from "+ TABLE_USER+" where "+COLU_2+" = "+name,null);
+        if(res.getCount()==0) //a keresett nev nem letezik a tablaban
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+    public Cursor not_voted_tasks(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where v.WHO = u.U_ID ",null);
+        //db.execSQL("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where v.WHO = u.U_ID ");
+        return res;
+    }
+
 }

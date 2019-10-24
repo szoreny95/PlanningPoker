@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,8 +29,20 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
-
-
+    public void viewAll_proba(){
+        Cursor res=mydb.GetAllData_User();
+        if(res.getCount()==0)
+        {
+            //hibauzenet
+            return;
+        }
+        StringBuffer buffer = new StringBuffer();
+        while(res.moveToNext())
+        {
+            buffer.append("ID: "+res.getInt(0)+" \n");
+            buffer.append("ID: "+res.getString(1)+" \n");
+        }
+    }
 
 
 }
