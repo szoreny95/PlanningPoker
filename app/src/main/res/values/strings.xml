@@ -1,12 +1,8 @@
 <resources>
     <string name="app_name">PlanningPoker</string>
-    <string name="next_topic">Next topic</string>
-    <string name="you_are_in_fragmentb">You are in fragmentB!</string>
     <string name="submit">Submit</string>
-    <string name="you_are_in_fragment_grid">You are in fragment grid!</string>
     <string name="login">Login</string>
     <string name="enter_name">Enter Name</string>
-    <string name="jelenlegi_task">Jelenlegi Task</string>
     <string name="vote">Vote</string>
     <string name="back">Back</string>
     <string name="current_task">Current Task</string>
