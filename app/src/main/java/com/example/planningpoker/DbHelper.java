@@ -105,7 +105,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     public Cursor not_voted_tasks(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where v.WHO = u.U_ID ",null);
+        Cursor res = db.rawQuery("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where v.WHO = "+name,null);
         //db.execSQL("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where v.WHO = u.U_ID ");
         return res;
     }
