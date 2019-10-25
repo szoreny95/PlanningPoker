@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         mydb = new DbHelper(this);
         mydb.InsertData_User("Joska");
         mydb.InsertData_TASK("Jo kerdes");
+
     }
 
     public void login_check(View view) {
