@@ -92,7 +92,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     public boolean is_exist_user(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select *from "+ TABLE_USER+" where "+COLU_2+" = "+name,null);
+        Cursor res = db.rawQuery("select *from "+ TABLE_USER+" where "+COLU_2+" = \""+name+"\"",null);
         if(res.getCount()==0) //a keresett nev nem letezik a tablaban
         {
             return false;
@@ -105,7 +105,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     public Cursor not_voted_tasks(String name){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where u.NAME = "+name,null);
+        Cursor res = db.rawQuery("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where u.NAME = \""+name+"\"",null);
         //db.execSQL("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where v.WHO = u.U_ID ");
         return res;
     }
