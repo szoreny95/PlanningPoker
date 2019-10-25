@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     DbHelper mydb;
@@ -17,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         mydb = new DbHelper(this);
         mydb.InsertData_User("Joska");
         mydb.InsertData_TASK("Jo kerdes");
+
     }
 
     public void login_check(View view) {
