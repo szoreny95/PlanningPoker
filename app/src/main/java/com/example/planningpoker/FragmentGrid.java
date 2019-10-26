@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,44 +21,51 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FragmentGrid extends Fragment {
     private RecyclerView recyclerView;
     private GridAdapter gridAdapter;
     private ArrayList<String> gridDataList = new ArrayList<>();
     private DbHelper mydb;
+    private Context context;
 
+    @Override
+    public void onCreate (Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        context = getActivity();
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_grid,container,false);
 
         //db and active user
-        mydb = new DbHelper(getActivity());
-        SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        String name = sharedPref.getString(getString(R.string.active_user),"Active User");
+        mydb = new DbHelper(context);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        String name = sharedPref.getString(getString(R.string.active_user),"Active user");
+        //Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
 
         //set task
-        TextView et_task = (TextView) v.findViewById(R.id.tv_task);
+        TextView tv_task = (TextView) v.findViewById(R.id.tv_task);
         Cursor res = mydb.not_voted_tasks(name);
         if(res.getCount() == 0)
         {
-            et_task.setText("No new tasks");
-            //return v;
+            String text = "No new tasks";
+            tv_task.setText(text);
+            return v;
         }
-        StringBuffer buffer = new StringBuffer();
         //we need only the first one
         res.moveToNext();
         String task = res.getString(0);
-        et_task.setText(task);
+        tv_task.setText(task);
 
         //initialise recyclerview
-        recyclerView = v.findViewById(R.id.recyclerView);
-        gridAdapter = new GridAdapter(gridDataList);
-        RecyclerView.LayoutManager manager = new GridLayoutManager(getActivity(), 3);
+        recyclerView = v.findViewById(R.id.recyclerView_grid);
+        gridAdapter = new GridAdapter(gridDataList, context);
+        RecyclerView.LayoutManager manager = new GridLayoutManager(context, 3);
         recyclerView.setLayoutManager(manager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(gridAdapter);
         GridDataPrepare();
 

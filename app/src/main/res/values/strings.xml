@@ -7,5 +7,6 @@
     <string name="back">Back</string>
     <string name="current_task">Current Task</string>
     <string name="active_user">-</string>
+    <string name="user_vote">\Vote</string>
 
 </resources>
