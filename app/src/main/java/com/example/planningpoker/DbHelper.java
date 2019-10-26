@@ -111,9 +111,25 @@ public class DbHelper extends SQLiteOpenHelper {
     }
     public Cursor who_what_voted(String question){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select v.WHO, v.WHAT from VOTING v INNER JOIN TASK t on t.T_ID=v.VOTE where t.QUESTION="+question,null);
+        Cursor res = db.rawQuery("select v.WHO, v.WHAT from VOTING v INNER JOIN TASK t on t.T_ID=v.VOTE where t.QUESTION = \""+question+"\"",null);
         return res;
     }
 
+    public Cursor getUserId(String userName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select " + COLU_1 +" from "+ TABLE_USER+" where "+COLU_2+" = \"" + userName + "\"",null);
+        return res;
+    }
 
+    public Cursor getTaskId(String taskName){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select " + COLT_1 +" from "+ TABLE_TASK + " where "+COLT_2+" = \"" + taskName + "\"",null);
+        return res;
+    }
+
+    public Cursor getUserName(int userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select " + COLU_2 +" from "+ TABLE_USER+" where "+COLU_1+" = " + userId,null);
+        return res;
+    }
 }
