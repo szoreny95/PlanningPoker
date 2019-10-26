@@ -109,5 +109,11 @@ public class DbHelper extends SQLiteOpenHelper {
         //db.execSQL("select "+COLT_2+" from "+TABLE_TASK+" EXCEPT select t.QUESTION from TASK t INNER JOIN VOTING v on t.T_ID=v.VOTE INNER JOIN USER u on u.U_ID=v.WHO where v.WHO = u.U_ID ");
         return res;
     }
+    public Cursor who_what_voted(String question){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor res = db.rawQuery("select v.WHO, v.WHAT from VOTING v INNER JOIN TASK t on t.T_ID=v.VOTE where t.QUESTION="+question,null);
+        return res;
+    }
+
 
 }
